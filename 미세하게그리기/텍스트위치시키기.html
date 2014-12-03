@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title></title>
+	<script type="text/javascript" src="../js/raphael.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+		var x = 100,
+			y = 400,
+			width = 800,
+			height = 800;
+
+			
+			var paper = Raphael( x, y, width, height );						
+			
+			// x=120, y=40/80/120의 위치에 기준선을 그린다.
+			paper.path('M120,0 v200');
+			paper.path('M0,40 h300');
+			paper.path('M0,80 h300');
+			paper.path('M0,120 h300');
+
+			// text-anchor 값을 이용해 정렬/위치시킬 수 있다.
+			// 좌우 정렬 뿐 아니라, 텍스트 엘리먼트의 위치도 바뀌는 것에 주의한다.
+			paper.text(120, 40, 'Text anchor\nLeft').attr({ 'text-anchor': 'start' });
+			paper.text(120, 80, 'Text anchor\nMiddle').attr({ 'text-anchor': 'middle' });
+			paper.text(120, 120, 'Text anchor\nEnd').attr({ 'text-anchor': 'end' });
+	</script>
+</body>
+</html>

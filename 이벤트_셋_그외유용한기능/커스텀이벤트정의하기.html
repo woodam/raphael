@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title></title>
+	<script type="text/javascript" src="../js/raphael.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+		var x = 100,
+			y = 400,
+			width = 800,
+			height = 800;
+
+			
+			var paper = Raphael( x, y, width, height );						
+			
+			// M = move to = 커서를 옮긴다
+			// L = line to = 라인을 그린다.
+			 // H = 수평 직선을 그린다. V = 수직
+			var pathString = 'M100,80 h40 v40 h40 v40 h-120 v-40 h40 z';
+    		var block = paper.path(pathString);
+
+
+			// eve.on()으로 커스텀 이벤트를 할당한다. 이벤트 명은 . 또는 / 로 구분할 수 있다.
+			// pubsub 라이브러리로 생각하면 될 듯.
+			eve.on('fruit.apple', function () {
+				console.log('fruit.apple');
+			});
+			eve.on('fruit.banana', function () {
+				console.log('fruit.banana');
+			});
+			eve.on('fruit.*', function () { // 와일드카드를 사용할 수도 있다.
+				console.log('fruit.*');
+			});
+
+			// eve()로 해당 이벤트를 호출할 수 있다.
+			eve('fruit.apple');
+	</script>
+</body>
+</html>

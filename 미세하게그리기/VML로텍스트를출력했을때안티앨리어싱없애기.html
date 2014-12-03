@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title></title>
+	<script type="text/javascript" src="../js/raphael.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+		var x = 100,
+			y = 400,
+			width = 800,
+			height = 800;
+
+			
+			var paper = Raphael( x, y, width, height );						
+			
+			var x = 150,
+				y = 50,
+				str = 'abcdefg ABCDEFG 01234 가나다라',
+			fontAttr = {
+				'font-size': 12,
+				'font-family': '돋움'
+			};    
+
+			paper.text(x, y, str).attr(fontAttr);
+			// IE8 이하 하위 버전에서 확인해본다.
+			// 라파엘은 기본적으로 VML의 TextPath를 사용해 텍스트를 그린다.
+			// TextPath의 특성 상, 사이즈가 작은 텍스트일 경우 안티앨리어싱이 적용돼 뿌옇게 보인다.
+			// @see TextPath http://msdn.microsoft.com/en-us/library/bb250511(v=vs.85).aspx
+
+			var textB = paper.text(x, y+50, str).attr(fontAttr);
+			textB.node.style.antialias = false;
+			// 위와 같이 텍스트 노드 style의 antialias 속성을 false로 설정하면, 안티앨리어싱을 제거할 수 있다.
+			// 하지만, 글자가 깨져 제대로 보이지 않는다.
+			// @see https://groups.google.com/group/cufon/browse_thread/thread/7a8b4f572f8081e1/27d564922538da29
+
+			var vml = [
+				'<v:shape style="position: relative; width: 100px; height: 100px">',
+				'<v:textbox>',
+				'<font size="2" face="돋움">abcdefg ABCDEFG 01234 가나다라</font>',
+				'</v:textbox>',
+				'</v:shape>'
+			].join('');
+			if (Raphael.vml) { $('#canvas').append(vml); }
+			// VML에서 텍스트를 출력할 때 textpath가 아니라 textbox를 사용한다면, 말끔히 표시할 수 있긴 하다.
+			// 하지만, 위에서도 언급했듯이 라파엘에서는 textpath만 사용한다.
+			// 텍스트를 쉽게 변형할 수 있는 등 미세하게 컨트롤 할 수 있기 때문인 것으로 추측한다. 
+	</script>
+</body>
+</html>

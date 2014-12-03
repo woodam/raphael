@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title></title>
+	<script type="text/javascript" src="../js/raphael.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+		var x = 100,
+			y = 400,
+			width = 800,
+			height = 800;
+
+			
+			var paper = Raphael( x, y, width, height );						
+			
+			// M = move to = 커서를 옮긴다
+			// L = line to = 라인을 그린다.
+			 // H = 수평 직선을 그린다. V = 수직
+			var pathString = 'M50,50 h40 v40 h40 v40 h-120 v-40 h40 z';
+    		var block = paper.path(pathString);
+    		// 래디얼 그래디언트 문자 포맷: "r[(‹fx›, ‹fy›)]‹colour›[-‹colour›[:‹offset›]]*-‹colour›"
+			// fx, fy = 그래디언트의 포인트를 어디에 둘 것인가?
+			block.attr({
+				'fill': 'ryellow-green'
+			}); // 적용할 수 없다. 래디얼 그래디언트는 '원형 도형'에만 적용가능한 것으로 보인다.
+
+			paper
+			.circle(80, 80, 40)
+			.attr({
+				// 0.25,0.75 부분에 그래디언트의 포커스를 두고,
+				// 노랑은 20%, 빨강은 60%로 오프셋을 설정한다.
+				'fill': 'r(0.25,0.75)yellow:20-red:60-orange'
+			});
+
+	</script>
+</body>
+</html>
