@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title></title>
+	<script type="text/javascript" src="../js/raphael.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+		var x = 100,
+			y = 400,
+			width = 800,
+			height = 800;
+
+			
+			var paper = Raphael( x, y, width, height );						
+			
+			paper.path('M0,30 h50').attr({
+				'stroke': 'red',
+				'stroke-width': 1,
+				'stroke-dasharray': '-'
+			});
+
+			// 1픽셀 라인을 그렸지만, 안티앨리어싱이 적용돼 1픽셀보다 두껍고 뿌옇게 보인다.
+			// 1픽셀짜리 라인는 해당 좌표에서 각각 위/아래로 0.5픽셀씩 그려지기 때문이다.
+
+			var path = paper.path('M50,30 h50').attr({
+				'stroke': 'blue',
+				'stroke-width': 1,
+				'stroke-dasharray': '-'
+			});
+			path.node.setAttribute('shape-rendering', 'crispEdges');
+			// path에 shape-rendering:crispEdges 스타일을 추가해 안티앨리어싱을 적용하지 않는 방법으로 해결할 수 있다.
+			// 하지만, IE에서는 여전히 뿌옇게 보인다.
+
+			var path = paper.path('M100,30.5 h50').attr({
+				'stroke': 'green',
+				'stroke-width': 1,
+				'stroke-dasharray': '-'
+			});
+			// 위/아래 그려진 영역이 정확하게 1픽셀에 채워질 수 있도록,
+			// 0.5픽셀 더 이동한 위치에 그리면 모든 브라우저에서 정확히 1픽셀로 표현할 수 있다.
+
+			paper.rect(150, 30, 50, 1).attr({
+				'stroke': '',
+				'fill': 'black'
+			});
+			// 대안으로 테두리가 없는 1px짜리 사각형을 그릴 수도 있다.
+			// 하지만 이 경우 점선을 표현하기 힘들다. 
+
+			paper.path('M200,30 h50 v1 h-50 z').attr({
+				'stroke': 'none',
+				'stroke-width': 0,
+				'fill': 'orange'
+			});
+			// 패스를 만들어서 테두리 없이 속을 채우는 방식(사각형을 그리는 것과 같은 원리)으로도 표현할 수 있다.
+	</script>
+</body>
+</html>

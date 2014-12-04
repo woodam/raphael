@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title></title>
+	<script type="text/javascript" src="../js/raphael.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+		var x = 100,
+			y = 400,
+			width = 800,
+			height = 800;
+
+			
+			var paper = Raphael( x, y, width, height );						
+			
+			// M = move to = 커서를 옮긴다
+			// L = line to = 라인을 그린다.
+			 // H = 수평 직선을 그린다. V = 수직
+			var pathString = 'M100,80 h40 v40 h40 v40 h-120 v-40 h40 z';
+    		var block = paper.path(pathString);
+
+
+			 // @see http://dmitry.baranovskiy.com/post/raphael-1-2-1
+			var anim = Raphael.animation({
+				'transform': 't0,80'
+			}, 1200, 'bounce');
+			block.animate(anim);
+
+			for (var i = 0; i < 500; i++) {
+				paper
+					.circle(40, 40, 20)
+					// 타이밍을 맞추기 위해 animateWith()를 사용한다.
+					.animateWith(block, anim, {
+					'transform': 't0,140'
+				}, 2000, 'bounce');
+			}
+
+			// animateWith()를 사용하면 첫 번째 파라미터로 전달된 엘리먼트의 타이머를 이용한다.
+			// 많은 엘리먼트를 애니메이팅하는 경우, animateWith()로 싱크 문제를 해결할 수 있다.
+	</script>
+</body>
+</html>

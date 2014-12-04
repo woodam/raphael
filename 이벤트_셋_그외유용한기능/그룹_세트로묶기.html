@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title></title>
+	<script type="text/javascript" src="../js/raphael.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+		var x = 100,
+			y = 400,
+			width = 800,
+			height = 800;
+
+			
+			var paper = Raphael( x, y, width, height );						
+			
+			// M = move to = 커서를 옮긴다
+			// L = line to = 라인을 그린다.
+			 // H = 수평 직선을 그린다. V = 수직
+			var pathString = 'M100,80 h40 v40 h40 v40 h-120 v-40 h40 z';
+    		var block = paper.path(pathString);
+
+
+			
+			var circle = paper.circle(40, 40, 20); // 테스트할 원을 하나 생성하고,
+			var set = paper.set(); // 셋을 생성한다.
+
+			set.push(block, circle); // 셋에 블럭과 원을 추가한다.
+
+			set.attr({
+				'fill': 'red'
+			});
+			// set을 생성한다고 해서 대상을 래핑하기 위한 엘리먼트를 만드는 것은 아니다.
+			// 단지, 대상 엘리먼트를 담고 있는 배열일 뿐이다.
+			// jquery에서 $가 작동하는 방식을 떠올리면 이해하기 쉬울 듯 하다.
+	</script>
+</body>
+</html>

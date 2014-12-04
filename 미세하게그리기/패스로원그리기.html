@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title></title>
+	<script type="text/javascript" src="../js/raphael.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+		var x = 100,
+			y = 400,
+			width = 800,
+			height = 800;
+
+			
+			var paper = Raphael( x, y, width, height );						
+			
+			// 선으로 원을 표현하기 위해 아래와 같이 반호를 두 번 그려 원을 완성하는 함수를 작성한다.
+			function getCirclePath(x, y, r) {
+				return [
+					'M', x, y-r,
+					'A', r, r, 0, 1, 1, x, y+r,
+					'A', r, r, 0, 1, 1, x, y-r,
+					'z'
+				].join(); // 시계방향으로 반호를 두 번 그려 완성한다.
+			}
+
+			var x = 100, y = 100, r = 50;
+
+			paper.circle(x, y, r).attr({
+				'stroke': 'red'
+			}); // 비교를 위한 원
+
+			paper.path(getCirclePath(x, y, r)).attr({
+				'stroke': 'green',
+				'fill': 'orange'
+			}); // 위 원과 동일한 것을 확인할 수 있다.
+	</script>
+</body>
+</html>

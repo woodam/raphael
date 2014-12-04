@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title></title>
+	<script type="text/javascript" src="../js/raphael.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+		var x = 100,
+			y = 400,
+			width = 800,
+			height = 800;
+
+			
+			var paper = Raphael( x, y, width, height );
+
+						
+			
+			// C = 커브를 그린다. x1,y1 x2,y2 x,y
+			// x1,y1 x2,y2는 커브의 포인터들이다.
+			var pathString = 'M40,40 C60,60 80,80 170,20';
+			paper.path(pathString);
+			
+	</script>
+</body>
+</html>
