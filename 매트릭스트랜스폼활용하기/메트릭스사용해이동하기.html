@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title></title>
+	<script type="text/javascript" src="../js/raphael.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+var x = 100,
+	y = 400,
+	width = 800,
+	height = 800;
+
+	
+	var paper = Raphael( x, y, width, height );						
+	
+	// M = move to = 커서를 옮긴다
+	// L = line to = 라인을 그린다.
+	 // H = 수평 직선을 그린다. V = 수직
+	var pathString = 'M100,80 h40 v40 h40 v40 h-120 v-40 h40 z';
+	var block = paper.path(pathString);
+
+
+(function (paper, block) {
+	// 라파엘의 행렬은 Raphael.matrix(a,b,c,d,e,f) 또는
+	// 매트릭스 문자열 'm'과, 'a,b,c,d,e,f' 값을 연속으로 나열한 문자열로 표현할 수 있다.
+	// 
+	// translate을 적용하기 위한 여섯 개의 파라미터를 행렬로 표현하면 아래 모습과 같다.
+	// ( a, b, e )
+	// ( c, d, f )
+	// ( 0, 0, 1 ) // 각 파라미터의 순서를 유심히 본다.
+
+	// (x,y)를 (x + tx, x + ty)로 transform 하기 위한 행렬은 아래와 같다.
+	// ( 1, 0,tx ) (x) = (1x + tx)
+	// ( 0, 1,ty ) (y) = (1y + ty) 
+	// ( 0, 0, 1 ) (1) = ( 1 ) 
+	block
+		.clone()
+		.transform('m1,0,0,1,50,50') // 50, 50 픽셀 이동한다.
+		.attr({
+		'stroke': 'red'
+	});
+
+	// SVG Matrix에 대한 정보는 아래 참고한다.
+	// http://www.mecxpert.de/svg/transform.html
+})(paper,block)
+	</script>
+</body>
+</html>

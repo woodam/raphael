@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title></title>
+	<script type="text/javascript" src="../js/raphael.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+var x = 100,
+	y = 400,
+	width = 800,
+	height = 800;
+
+	
+	var paper = Raphael( x, y, width, height );						
+	
+	// M = move to = 커서를 옮긴다
+	// L = line to = 라인을 그린다.
+	 // H = 수평 직선을 그린다. V = 수직
+	var pathString = 'M100,80 h40 v40 h40 v40 h-120 v-40 h40 z';
+	var block = paper.path(pathString);
+
+
+(function (paper, block) {
+	// rotation을 적용하기 위한 행렬 계산식은 아래와 같다.
+	// ( cos(a),-sin(a), 0 ) (x) = (cos(a)*x - sin(a)*y)
+	// ( sin(a),cos(a), 0) (y) = (sin(a)*x + cons(a)*y)
+	// ( 0, 0, 1 ) (1) = ( 1 )
+
+	var angle = 15,
+		radian = Raphael.rad(angle), // 각도를 라디언으로 변경한다
+		a = Math.cos(radian),
+		b = -Math.sin(radian),
+		c = -b,
+		d = a,
+		e = 0,
+		f = 0,
+		matrix = Raphael.matrix(a, b, c, d, e, f);
+
+	block
+		.clone()
+		.transform(matrix.toTransformString()) // 원점을 기준으로 15도 회전한다.
+		.attr({
+			'stroke': 'red'
+		});
+	// 각도의 값이 양수이면, 회전 방향이 반시계 방향인 것에 주의한다. 
+})(paper,block)
+	</script>
+</body>
+</html>

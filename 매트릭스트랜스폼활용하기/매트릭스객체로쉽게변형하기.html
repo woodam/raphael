@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title></title>
+	<script type="text/javascript" src="../js/raphael.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+var x = 100,
+	y = 400,
+	width = 800,
+	height = 800;
+
+	
+	var paper = Raphael( x, y, width, height );						
+	
+	// M = move to = 커서를 옮긴다
+	// L = line to = 라인을 그린다.
+	 // H = 수평 직선을 그린다. V = 수직
+	var pathString = 'M100,80 h40 v40 h40 v40 h-120 v-40 h40 z';
+	var block = paper.path(pathString);
+
+
+(function (paper, block) {
+	// 이전 테스트처럼 직접 매트릭스 수치를 계산하는 방법은 복잡하고 어렵다.
+	// Raphael.matrix 객체의 translate(), rotate(), scale() 메서드를 사용하면 쉽게 처리할 수 있다.
+	var matrix = Raphael.matrix();
+	matrix.translate(50, 50); // 50,50만큼 이동한다.
+	matrix.scale(0.7, 0.7, 50, 50); // 그 다음, 스케일을 줄이고
+	matrix.rotate(-30, 100, 100); // 30도 회전한다.
+
+	block
+		.clone()
+		.attr('stroke', 'red')
+		.transform(matrix.toTransformString()); // 매트릭스 스트링으로 변경해 적용한다.
+
+	// Element.translate(), rotate(), scale()은 deprecated이니 사용하지 않도록 한다.
+})(paper,block)
+	</script>
+</body>
+</html>
